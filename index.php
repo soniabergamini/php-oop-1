@@ -1,7 +1,6 @@
 <?php
 require 'db.php';
-include_once __DIR__ . '/models/movie_class.php';
-
+require_once __DIR__ . '/models/movie_class.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,11 +21,11 @@ include_once __DIR__ . '/models/movie_class.php';
     </header>
 
     <!-- Main Contents -->
-    <main class="flex gap-4 overflow-y-scroll border w-full">
+    <main class="flex gap-4 overflow-y-scroll w-full">
 
         <!-- Movie Cards -->
         <?php foreach ($movies as $film) { ?>
-            <div class="border py-4 px-3 min-w-[280px] text-sm">
+            <div class="border py-4 px-3 min-w-[280px] text-sm border-neutral-800">
 
                 <!-- Movie Cover & Info -->
                 <ul>
@@ -36,22 +35,20 @@ include_once __DIR__ . '/models/movie_class.php';
 
                                 <!-- Movie Cover -->
                                 <div class="flex justify-center mb-4">
-                                    <img src="<?php echo $value ?>" alt="movie_cover" class="w-[250px] h-[285px] object-cover object-center">
+                                    <img src="<?= $value ?>" alt="<?= str_replace(' ', '_', $film->title) ?>_cover" class="w-[250px] h-[285px] object-cover object-center">
                                 </div>
 
                             <?php } elseif ($property != 'genres') { ?>
 
                                 <!-- Movie Details -->
-                                <strong><?php echo strtoupper($property) ?>: </strong>
-                                <span><?php echo $value ?></span>
+                                <strong><?= strtoupper($property) ?>: </strong>
+                                <span><?= $value ?></span>
 
                             <?php } else { ?>
 
                                 <!-- Movie Genres -->
-                                <strong><?php echo strtoupper($property) ?>: </strong>
-                                <?php foreach ($film->genres as $gen) { ?>
-                                    <span> <?php echo $gen ?></span>
-                                <?php } ?>
+                                <strong><?= strtoupper($property) ?>: </strong>
+                                <span> <?= implode(', ', $film->genres) ?></span>
 
                             <?php } ?>
                         </li>

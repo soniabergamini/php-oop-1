@@ -8,7 +8,7 @@ class Movie
     public $language;
     public $year;
     public $actor_hero;
-    public $genres = [];
+    public $genres;
 
     public function setCover($img)
     {
